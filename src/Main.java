@@ -31,6 +31,7 @@ public class Main {
             }
         });
         service1.submit(s1);
+        service1.shutdown();
         Thread s2 = new Thread(() -> {
             for (int i = 1000; i>= 0; i--) {
                 counter.dicrement();
@@ -41,12 +42,19 @@ public class Main {
                 }
             }
         });
+
+
         service2.submit(s2);
+        service2.shutdown();
 
-
-
+        while (!service.isTerminated()) {}
 
         System.out.println("Final Counter " + counter.getCount());
+
+
+
+
+
 
 
     }
